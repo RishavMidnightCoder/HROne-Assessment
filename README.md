@@ -32,10 +32,10 @@ No `.env`, no secrets, no Dockerfile.
 This endpoint is used to punch out an employee. It finds the employee's latest open attendance record and checks whether the punch-out time is valid. If the time is invalid, it returns an error. It updates the record only if it has not already been punched out. After that, it calculates work hours, overtime, and half-day status.
 
 ## 2. PATCH /attendance/{emp_code}/{date}
-This endpoint is used to correct an existing attendance record. After the correction, it recalculates late minutes, overtime, and half-day status. It stores only the fields that actually changed in the history. If another request updates the record first, it returns a conflict instead of overwriting the other change.
+This endpoint is used to correct an existing attendance record. After the correction, it recalculates late minutes, work hours, overtime, and half-day status. It stores only the fields that actually changed in the history. If another request updates the record first, it returns a conflict instead of overwriting the other change.
 
 ## 3. GET /analytics/employees/{emp_code}/monthly
-This endpoint gives the monthly attendance summary for an employee. It groups the attendance records for the selected month and calculates present days, late minutes, and work hours. Working days are calculated based on the employee's joining date. A half-day counts as 0.5 present days. Weekend late minutes and overtime are counted, but weekends do not increase present days.
+This endpoint gives the monthly attendance summary for an employee. It groups the attendance records for the selected month and calculates present days, late minutes. Working days are calculated based on the employee's joining date. A half-day counts as 0.5 present days. Weekend late minutes and overtime are counted, but weekends do not increase present days.
 
 ## 4. GET /analytics/departments/summary
 This endpoint gives the attendance summary for each department. It starts from the employees collection so employees without attendance records are also counted. It then uses $lookup to attach attendance records and calculates the department headcount, total work hours, and average work hours.
