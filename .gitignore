@@ -1,0 +1,6 @@
+.venv/
+.env
+__pycache__/
+seed_100k.py
+check_100k.py
+verify_contract.py
